@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <fragment
         android:id="@+id/news_title_fragment"
-        android:name="com.example.androiddevelopment.News.NewsTitleFragment"
+        android:name="com.example.androiddevelopmentfinal.News.NewsTitleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androiddevelopment.R;
+import com.example.androiddevelopmentfinal.R;
 
 import java.util.List;
 

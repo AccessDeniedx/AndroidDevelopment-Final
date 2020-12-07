@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androiddevelopment.R;
+import com.example.androiddevelopmentfinal.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class NewsTitleFragment extends Fragment{
     @Override
     public void onActivityCreated(Bundle saveInstanceState){
         super.onActivityCreated(saveInstanceState);
-        if(getActivity().findViewById(R.id.news_content_layout)!=null){
+        if(getActivity().findViewById(R.id.news_content)!=null){
             isTwoPane = true;
         }else {
             isTwoPane = false;

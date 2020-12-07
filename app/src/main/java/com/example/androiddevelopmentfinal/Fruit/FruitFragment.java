@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androiddevelopment.R;
+import com.example.androiddevelopmentfinal.R;
 
 import java.util.ArrayList;
 import java.util.List;

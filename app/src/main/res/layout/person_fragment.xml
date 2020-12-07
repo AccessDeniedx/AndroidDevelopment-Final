@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +15,16 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <!--用户头像-->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/user_image"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:src="@drawable/e"
+            android:src="@drawable/apple_pic"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="2dp" />
 
+        <!--用户昵称-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,19 +35,22 @@
     </LinearLayout>
 
 
+    <!--钱包-->
     <com.leon.lib.settingview.LSettingItem
         android:id="@+id/item_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        leon:leftIcon="@drawable/ic_money"
+        leon:leftIcon="@drawable/ic_wallet"
         leon:leftText="钱包" />
 
+    <!--收藏-->
     <com.leon.lib.settingview.LSettingItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        leon:leftIcon="@drawable/ic_collect"
+        leon:leftIcon="@drawable/ic_stars"
         leon:leftText="收藏" />
 
+    <!--相册-->
     <com.leon.lib.settingview.LSettingItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,6 +58,7 @@
         leon:leftText="相册"
         leon:rightStyle="iconHide"/>
 
+    <!--卡包-->
     <com.leon.lib.settingview.LSettingItem
         android:id="@+id/item_four"
         android:layout_width="match_parent"
@@ -63,29 +68,23 @@
         leon:leftText="卡包"
         leon:rightStyle="iconCheck"/>
 
+    <!--表情-->
     <com.leon.lib.settingview.LSettingItem
         android:id="@+id/item_five"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        leon:leftIcon="@drawable/ic_face"
+        leon:leftIcon="@drawable/ic_emoji"
         leon:leftText="表情" />
 
+    <!--设置-->
     <com.leon.lib.settingview.LSettingItem
         android:id="@+id/item_six"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/MyCheckBox"
-        leon:leftIcon="@drawable/ic_setting"
+        leon:leftIcon="@drawable/ic_settings"
         leon:rightStyle="iconSwitch"
         leon:leftText="设置" />
-
-    <com.leon.lib.settingview.LSettingItem
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        leon:isShowUnderLine="false"
-        leon:leftIcon="@drawable/ofm_feedback_icon"
-        leon:leftText="我的位置"
-        leon:rightStyle="iconSwitch" />
 
 
 </LinearLayout>

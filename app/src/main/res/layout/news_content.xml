@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/news_content_fragment"
-        android:name="com.example.androiddevelopment.News.NewsContentFragment"
+        android:name="com.example.androiddevelopmentfinal.News.NewsContentFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

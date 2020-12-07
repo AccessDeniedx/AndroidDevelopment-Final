@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.androiddevelopment.R;
+import com.example.androiddevelopmentfinal.R;
 
 public class NewsContentFragment extends Fragment {
     private View view;
