@@ -1,5 +1,6 @@
 package com.example.androiddevelopmentfinal.Person;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,10 +39,6 @@ public class PersonFragment extends Fragment {
             }
         });*/
 
-
-        //对一个控件进行点击事件
-        LSettingItem one =view.findViewById(R.id.item_one);
-
         //碎片实践 新闻
         /*Button news_button = (Button) getActivity().findViewById(R.id.news_button);
         news_button.setOnClickListener(new View.OnClickListener(){
@@ -51,6 +48,18 @@ public class PersonFragment extends Fragment {
                 startActivity(intent);
             }
         });*/
+
+        /*强制下线*/
+        LSettingItem force_Offline =view.findViewById(R.id.force_Offline);
+        force_Offline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("lalala", "onClick: "+v.getTag().toString());
+                Intent intent = new Intent("com.example.broadcastbestpractice." +
+                        "FORCE_OFFLINE");
+                getActivity().sendBroadcast(intent);
+            }
+        });
 
     }
 

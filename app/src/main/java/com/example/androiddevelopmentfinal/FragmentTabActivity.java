@@ -26,11 +26,11 @@ import com.example.androiddevelopmentfinal.Message.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentTabActivity extends AppCompatActivity implements View.OnClickListener {
+public class FragmentTabActivity extends BaseActivity implements View.OnClickListener {
     public String[] btnTitles = new String[]{"通讯录","消息", "新闻","其他"};// 按钮标题
     public List<Fragment> contextFragments = new ArrayList<>();// 用来存放Fragments的集合
     public LinearLayout linearLayout;
-    public static final String TAG = "MainActivity";
+    /*public static final String TAG = "MainActivity";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,34 +176,4 @@ public class FragmentTabActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        Log.d(TAG,"onStart");
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.d(TAG,"onResume");
-    }
-    @Override
-    protected void onPause(){
-        super.onPause();
-        Log.d(TAG,"onPause");
-    }
-    @Override
-    protected void onStop(){
-        super.onStop();
-        Log.d(TAG,"onStop");
-    }
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        Log.d(TAG,"onDestroy");
-    }
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-        Log.d("FirstActivity","onRestart");
-    }
 }
