@@ -6,10 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import com.example.androiddevelopmentfinal.R;
+import com.leon.lib.settingview.LSettingItem;
+
 import com.leon.lib.settingview.LSettingItem;
 
 public class PersonFragment extends Fragment {
@@ -28,6 +32,7 @@ public class PersonFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d("onActivityCreate:","Here is AccessDenied's test");
 
         /*//显式intent
         Button explicit_button = (Button) getActivity().findViewById(R.id.explicitIntent_button);
@@ -50,16 +55,27 @@ public class PersonFragment extends Fragment {
         });*/
 
         /*强制下线*/
-        LSettingItem force_Offline =view.findViewById(R.id.force_Offline);
-        force_Offline.setOnClickListener(new View.OnClickListener() {
+        LSettingItem force_Offline = (LSettingItem) view.findViewById(R.id.force_Offline);
+
+        force_Offline.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
-            public void onClick(View v) {
-                Log.d("lalala", "onClick: "+v.getTag().toString());
-                Intent intent = new Intent("com.example.broadcastbestpractice." +
+            public void click() {
+                Toast.makeText(getActivity(),"You clicked Add",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent("com.example.androiddevelopmentfinal." +
                         "FORCE_OFFLINE");
                 getActivity().sendBroadcast(intent);
             }
+
         });
+
+        /*Button buttontest = view.findViewById(R.id.test_button);
+        buttontest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"You clicked Add",Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
 
     }
 

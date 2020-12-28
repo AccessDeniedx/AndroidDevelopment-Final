@@ -34,6 +34,11 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <!--<Button
+        android:id="@+id/test_button"
+        android:text="test_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
 
     <!--钱包-->
     <com.leon.lib.settingview.LSettingItem
@@ -85,6 +90,7 @@
         leon:leftIcon="@drawable/ic_settings"
         leon:rightStyle="iconSwitch"
         leon:leftText="设置" />
+
 
 
 </LinearLayout>

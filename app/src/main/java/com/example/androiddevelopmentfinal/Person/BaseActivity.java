@@ -26,7 +26,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.example.broadcastbestpractice.FORCE_OFFLINE");
+        intentFilter.addAction("com.example.androiddevelopmentfinal.FORCE_OFFLINE");
         receiver = new ForceOfflineReceiver();
         registerReceiver(receiver,intentFilter);
 

@@ -35,8 +35,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        UserNumberedit = findViewById(R.id.UserNumber);
-        passwordedit = findViewById(R.id.Password);
+        /*UserNumberedit = findViewById(R.id.UserNumber);
+        passwordedit = findViewById(R.id.Password);*/
 
         login_button = findViewById(R.id.login_button);
         find_password = findViewById(R.id.find_password);
@@ -70,11 +70,15 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void click_Login_button () {
+        UserNumberedit = findViewById(R.id.UserNumber);
+        passwordedit = findViewById(R.id.Password);
         if (login_check(username, password)) {
             Intent intent = new Intent(login.this, FragmentTabActivity.class);
             startActivity(intent);
         } else
-            Toast.makeText(login.this, "用户名或者密码错误！", Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(login.this, "用户名或者密码错误！", Toast.LENGTH_SHORT).show();*/
+            Toast.makeText(login.this, "用户名："+username+
+                    "\n密码："+password+"!", Toast.LENGTH_SHORT).show();
     }
     private boolean login_check (String username, String password){
         username = UserNumberedit.getText().toString();
