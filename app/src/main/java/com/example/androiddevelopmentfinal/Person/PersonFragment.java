@@ -2,6 +2,7 @@ package com.example.androiddevelopmentfinal.Person;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,11 +57,10 @@ public class PersonFragment extends Fragment {
 
         /*强制下线*/
         LSettingItem force_Offline = (LSettingItem) view.findViewById(R.id.force_Offline);
-
         force_Offline.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
             public void click() {
-                Toast.makeText(getActivity(),"You clicked Add",Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getActivity(),"You clicked Add",Toast.LENGTH_SHORT).show();*/
                 Intent intent = new Intent("com.example.androiddevelopmentfinal." +
                         "FORCE_OFFLINE");
                 getActivity().sendBroadcast(intent);
@@ -68,13 +68,18 @@ public class PersonFragment extends Fragment {
 
         });
 
-        /*Button buttontest = view.findViewById(R.id.test_button);
-        buttontest.setOnClickListener(new View.OnClickListener() {
+
+        /*读取联系人*/
+        LSettingItem read_contact = (LSettingItem) view.findViewById(R.id.read_contacts);
+        read_contact.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(),"You clicked Add",Toast.LENGTH_SHORT).show();
+            public void click() {
+
+                Intent intent = new Intent(getActivity(), Contacts_Reader.class);
+                startActivity(intent);
             }
-        });*/
+
+        });
 
 
     }

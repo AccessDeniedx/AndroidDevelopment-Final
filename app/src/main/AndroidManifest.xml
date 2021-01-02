@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androiddevelopmentfinal">
 
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
@@ -10,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Contacts_Reader"></activity>
+        <activity android:name=".Person.Contacts_Reader"></activity>
         <activity
             android:name=".login.login"
             android:theme="@style/AppTheme.NoActionBar">

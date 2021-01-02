@@ -3,6 +3,7 @@ package com.example.androiddevelopmentfinal.login;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -242,6 +243,7 @@ public class login extends BaseActivity implements View.OnClickListener {
             return position;
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         public View getView(final int position, View convertView, ViewGroup parent) {
             layoutInflater  = LayoutInflater.from(context);
             convertView = layoutInflater.inflate(R.layout.list_row, null);
@@ -286,10 +288,8 @@ public class login extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onStop() {
         super.onStop();
-        pop.dismiss();
+        /*pop.dismiss();*/
     }
-
-
 
     public void getViews() {
         login_button = findViewById(R.id.login_button);
