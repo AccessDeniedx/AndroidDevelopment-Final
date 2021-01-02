@@ -32,7 +32,7 @@ public class PersonFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d("onActivityCreate:","Here is AccessDenied's test");
+        //Log.d("onActivityCreate:","Here is AccessDenied's test");
 
         /*//显式intent
         Button explicit_button = (Button) getActivity().findViewById(R.id.explicitIntent_button);

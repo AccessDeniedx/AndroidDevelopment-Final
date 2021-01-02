@@ -30,15 +30,18 @@ public class FragmentTabActivity extends BaseActivity implements View.OnClickLis
     public String[] btnTitles = new String[]{"通讯录","消息", "新闻","其他"};// 按钮标题
     public List<Fragment> contextFragments = new ArrayList<>();// 用来存放Fragments的集合
     public LinearLayout linearLayout;
+    String account;
     /*public static final String TAG = "MainActivity";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_tab);
-        Log.d("FirstActivity",this.toString());
-
+        /*Log.d("FirstActivity",this.toString());*/
+        Intent intent = getIntent();
+        account = intent.getStringExtra("account");
         init();// 初始化控件
+
     }
 
     /**
@@ -104,10 +107,11 @@ public class FragmentTabActivity extends BaseActivity implements View.OnClickLis
         contextFragments.add(msgFragment);
         contextFragments.add(personFragment);
 
-        /*// 设置ContextFragment中文本的值，这里用Bundle传值
+        // 设置ContextFragment中文本的值，这里用Bundle传值
         Bundle bundle = new Bundle();
-        bundle.putString("textValue", btnStr);
-        contextFragment.setArguments(bundle);*/
+        bundle.putString("account", account);
+        msgFragment.setArguments(bundle);
+
 
         // 提交事务
         transaction.commit();
