@@ -19,6 +19,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:textColor="#000"
+            android:autoLink="email|phone|web"
             />
 
     </LinearLayout>
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:autoLink="email|phone|web"
             />
     </LinearLayout>
 

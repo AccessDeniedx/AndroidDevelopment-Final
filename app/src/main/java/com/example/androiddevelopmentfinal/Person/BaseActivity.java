@@ -51,8 +51,8 @@ public class BaseActivity extends AppCompatActivity {
         @Override
         public void onReceive(final Context context, Intent intent) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Warning");
-            builder.setMessage("You ate forced to be offline. Please try to login again.");
+            builder.setTitle("注意！");
+            builder.setMessage("您已被强制下线！请重新登录！");
             builder.setCancelable(false);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override

@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.androiddevelopmentfinal.Media.MediaFragment;
 import com.example.androiddevelopmentfinal.Person.*;
 import com.example.androiddevelopmentfinal.Fruit.*;
 import com.example.androiddevelopmentfinal.Message.*;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentTabActivity extends BaseActivity implements View.OnClickListener {
-    public String[] btnTitles = new String[]{"通讯录","消息", "新闻","其他"};// 按钮标题
+    public String[] btnTitles = new String[]{"通讯录","消息", "多媒体","其他"};// 按钮标题
     public List<Fragment> contextFragments = new ArrayList<>();// 用来存放Fragments的集合
     public LinearLayout linearLayout;
     String account;
@@ -95,17 +96,20 @@ public class FragmentTabActivity extends BaseActivity implements View.OnClickLis
         FruitFragment fruitFragment = new FruitFragment();
         MsgFragment msgFragment = new MsgFragment();
         PersonFragment personFragment = new PersonFragment();
+        MediaFragment mediaFragment = new MediaFragment();
 
         // 将ContextFragment添加到contextFrameLayout，并设置tag为按钮的标题
         // （这里的Tag和按钮的Tag是一样的，按钮点击事件中用按钮的Tag查找Fragment）
         transaction.add(R.id.contextFrameLayout, fruitFragment, "通讯录");
         transaction.add(R.id.contextFrameLayout,msgFragment,"消息");
         transaction.add(R.id.contextFrameLayout, personFragment,"其他");
+        transaction.add(R.id.contextFrameLayout,mediaFragment,"多媒体");
 
         // 将contextFragment加入Fragment集合中
         contextFragments.add(fruitFragment);
         contextFragments.add(msgFragment);
         contextFragments.add(personFragment);
+        contextFragments.add(mediaFragment);
 
         // 设置ContextFragment中文本的值，这里用Bundle传值
         Bundle bundle = new Bundle();
@@ -178,6 +182,7 @@ public class FragmentTabActivity extends BaseActivity implements View.OnClickLis
                 break;
             default:
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

@@ -1,6 +1,12 @@
 package com.example.androiddevelopmentfinal.Message;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,10 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androiddevelopmentfinal.FragmentTabActivity;
+import com.example.androiddevelopmentfinal.Http.WebActivity;
+import com.example.androiddevelopmentfinal.Person.PersonFragment;
 import com.example.androiddevelopmentfinal.R;
 import com.example.androiddevelopmentfinal.login.*;
 
@@ -20,6 +30,8 @@ import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class MsgFragment extends Fragment {
     private List<Msg> msgLists= new ArrayList<>();
@@ -57,15 +69,67 @@ public class MsgFragment extends Fragment {
                     msg.setType(1);
                     msg.save();
                     msgLists.add(msg);
+                    WebActivity webActivity=new WebActivity(msg.getContent());
                     replyMsgs(content);
                     adapter.notifyItemInserted(msgLists.size() - 1);
                     msgRecyclerView.scrollToPosition(msgLists.size() - 1);
                     inputText.setText("");
+                    showNotification(account,content);
                 }
+
             }
         });
 
         return view;
+    }
+
+    private void showNotification(String account,String content){
+        Intent intent = new Intent(getActivity(), FragmentTabActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(getActivity(),0,intent,0);
+        NotificationManager manager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+
+        if(Build.VERSION.SDK_INT >= 26)
+        {
+            //当sdk版本大于26
+            String id = "channel_1";
+            String description = "143";
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel(id, description, importance);
+            manager.createNotificationChannel(channel);
+            PersonFragment personFragment = new PersonFragment();
+            Notification notification = new Notification.Builder(getActivity(), id)
+                    .setCategory(Notification.CATEGORY_MESSAGE)
+                    .setContentTitle(account)
+                    .setContentText(content)
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
+                    .setContentIntent(pi)
+                    .setAutoCancel(true)
+                    .setPriority(Notification.PRIORITY_HIGH)
+                    /*.setStyle(new Notification.BigPictureStyle().bigPicture(
+                            BitmapFactory.decodeResource(getResources(),R.drawable.apple_pic)))*/
+                    .setStyle(new Notification.BigPictureStyle().bigPicture(personFragment.getPicture()))
+                    .build();
+            manager.notify(1, notification);
+        }
+        else
+        {
+            //当sdk版本小于26
+            Notification notification = new NotificationCompat.Builder(getActivity())
+                    .setContentTitle("This is content title")
+                    .setContentText("This is content text")
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
+                    .setContentIntent(pi)
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(
+                            BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher_background)))
+                    .build();
+            manager.notify(1,notification);
+        }
     }
 
     private void initMsgs(){
