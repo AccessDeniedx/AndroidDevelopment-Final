@@ -125,7 +125,7 @@
             android:id="@+id/phone_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="手机号登录"
+            android:text="服务器注册"
             android:textSize="15dp"
             android:textColor="#000"
             android:textStyle="bold" />

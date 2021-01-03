@@ -28,14 +28,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androiddevelopmentfinal.FragmentTabActivity;
+import com.example.androiddevelopmentfinal.Http.HttpUtil;
+import com.example.androiddevelopmentfinal.Http.RegistActivity;
 import com.example.androiddevelopmentfinal.Person.BaseActivity;
 import com.example.androiddevelopmentfinal.R;
 
 import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class login extends BaseActivity implements View.OnClickListener {
 
@@ -60,6 +67,8 @@ public class login extends BaseActivity implements View.OnClickListener {
     private PopupWindow pop;
     private View namelayout;
     private ListView listView;
+
+    /*String loginAddress = "http://localhost:8080/Androidservice/LoginServlet";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +191,8 @@ public class login extends BaseActivity implements View.OnClickListener {
     }
 
     private void click_phone_login(){
-
+        Intent intent = new Intent(login.this, RegistActivity.class);
+        startActivityForResult(intent, 1);
     }
 
     private void click_new_regist(){
@@ -276,6 +286,7 @@ public class login extends BaseActivity implements View.OnClickListener {
     }
 
     public List<String> getData() {
+        /*loginWithOkHttp(loginAddress, account, password);*/
         List<UserInfo> users = DataSupport.findAll(UserInfo.class);
         names = new ArrayList<String>();
         for(UserInfo user : users){
@@ -302,6 +313,33 @@ public class login extends BaseActivity implements View.OnClickListener {
         imgbtn = (ImageButton)findViewById(R.id.imgbtn);
         UserNum = (EditText)findViewById(R.id.UserNumber);
         rememberPass = (CheckBox) findViewById(R.id.remember_pass);
+    }
+
+    public void loginWithOkHttp(String address,String account,String password){
+        HttpUtil.loginWithOkHttp(address,account,password, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //得到服务器返回的具体内容
+                final String responseData = response.body().string();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (responseData.equals("true")){
+                            Toast.makeText(login.this,"登录成功",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(login.this,"登录失败",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+        });
     }
 
 }
