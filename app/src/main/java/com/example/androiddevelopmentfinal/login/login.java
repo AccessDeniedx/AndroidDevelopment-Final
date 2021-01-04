@@ -149,16 +149,16 @@ public class login extends BaseActivity implements View.OnClickListener {
         password = passwordEdit.getText().toString();
 
         if (login_check(account, password)) {
-            Toast.makeText(login.this, "用户名："+account+
-                    "\n密码："+password+"!", Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(login.this, "用户名："+account+
+                    "\n密码："+password+"!", Toast.LENGTH_SHORT).show();*/
             Intent intent = new Intent(login.this, FragmentTabActivity.class);
             intent.putExtra("account",account);
             startActivity(intent);
             finish();
         } else
-            /*Toast.makeText(login.this, "用户名或者密码错误！", Toast.LENGTH_SHORT).show();*/
-            Toast.makeText(login.this, "用户名："+account+
-                    "\n密码："+password+"!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(login.this, "用户名或者密码错误！", Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(login.this, "用户名："+account+
+                    "\n密码："+password+"!", Toast.LENGTH_SHORT).show();*/
     }
 
     private boolean login_check (String account, String password) {

@@ -2,8 +2,11 @@ package com.example.androiddevelopmentfinal.Person;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,6 +17,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -35,6 +39,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androiddevelopmentfinal.DownLoad.DownloadService;
 import com.example.androiddevelopmentfinal.R;
 import com.leon.lib.settingview.LSettingItem;
 
@@ -46,13 +51,41 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.IBinder;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.content.Context.BIND_AUTO_CREATE;
 
 public class PersonFragment extends Fragment {
 
     View view;
     LSettingItem force_Offline;
     LSettingItem read_contact;
+    LSettingItem start_download;
+    LSettingItem pause_download;
+    LSettingItem cancel_download;
+    
+    private DownloadService.DownloadBinder downloadBinder;
+    
+    private ServiceConnection connection = new ServiceConnection(){
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            downloadBinder = (DownloadService.DownloadBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
@@ -71,7 +104,20 @@ public class PersonFragment extends Fragment {
         picture = (CircleImageView) view.findViewById(R.id.user_image);
         force_Offline = (LSettingItem) view.findViewById(R.id.force_Offline);
         read_contact = (LSettingItem) view.findViewById(R.id.read_contacts);
+        start_download = (LSettingItem) view.findViewById(R.id.start_download);
+        pause_download = (LSettingItem) view.findViewById(R.id.pause_download);
+        cancel_download = (LSettingItem) view.findViewById(R.id.cancel_download);
 
+        Intent intent = new Intent(getActivity(),DownloadService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //android8.0以上通过startForegroundService启动服务
+            getActivity().startForegroundService(intent);
+        } else {
+            getActivity().startService(intent); }
+        getActivity().bindService(intent, connection, BIND_AUTO_CREATE); //绑定服务
+        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        }
         /*Bitmap bt = BitmapFactory.decodeFile(path + "head.jpg");// 从SD卡中找头像，转换成Bitmap
         if (bt != null) {
             @SuppressWarnings("deprecation")
@@ -85,6 +131,8 @@ public class PersonFragment extends Fragment {
         }*/
         return this.view;
     }
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -116,6 +164,39 @@ public class PersonFragment extends Fragment {
                 showTypeDialog();
             }
         });
+        
+        /*start_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(downloadBinder == null)
+                    return;
+                String url = "https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-web-community-8.0.22.0.msi";
+                downloadBinder.startDownload(url);
+            }
+        });
+        
+        pause_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(downloadBinder == null)
+                    return;
+                downloadBinder.pauseDownload();
+            }
+        });
+        cancel_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(downloadBinder == null)
+                    return;
+                downloadBinder.cancelDownload();
+            }
+        });*/
+    }
+    
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        getActivity().unbindService(connection);
     }
 
     private void showTypeDialog() {

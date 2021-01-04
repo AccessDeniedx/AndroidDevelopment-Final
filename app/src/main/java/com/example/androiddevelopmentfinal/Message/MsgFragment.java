@@ -76,7 +76,6 @@ public class MsgFragment extends Fragment {
                     inputText.setText("");
                     showNotification(account,content);
                 }
-
             }
         });
 

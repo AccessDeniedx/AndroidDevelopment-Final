@@ -57,31 +57,32 @@
         leon:leftIcon="@drawable/ic_stars"
         leon:leftText="读取联系人" />
 
-    <!--相册-->
+    <!--开始下载-->
     <com.leon.lib.settingview.LSettingItem
+        android:id="@+id/start_download"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         leon:leftIcon="@drawable/ic_photo"
-        leon:leftText="相册"
+        leon:leftText="开始下载"
         leon:rightStyle="iconHide"/>
 
-    <!--卡包-->
+    <!--暂停下载-->
     <com.leon.lib.settingview.LSettingItem
-        android:id="@+id/item_four"
+        android:id="@+id/pause_download"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:theme="@style/MyCheckBox"
         leon:leftIcon="@drawable/ic_card"
-        leon:leftText="卡包"
-        leon:rightStyle="iconCheck"/>
+        leon:leftText="暂停下载"
+        />
 
-    <!--表情-->
+    <!--取消下载-->
     <com.leon.lib.settingview.LSettingItem
-        android:id="@+id/item_five"
+        android:id="@+id/cancel_download"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         leon:leftIcon="@drawable/ic_emoji"
-        leon:leftText="表情" />
+        leon:leftText="取消下载" />
 
     <!--设置-->
     <com.leon.lib.settingview.LSettingItem
@@ -90,7 +91,6 @@
         android:layout_height="50dp"
         android:theme="@style/MyCheckBox"
         leon:leftIcon="@drawable/ic_settings"
-        leon:rightStyle="iconSwitch"
         leon:leftText="设置" />
 
 
